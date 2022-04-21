@@ -9,9 +9,18 @@ namespace UpworkTest.Context
     public class Context : DbContext
     {
         /// <summary>
+        /// Constructor of context
+        /// </summary>
+        /// <param name="options"></param>
+        public Context(DbContextOptions<Context> options)
+            : base(options)
+        {
+        }
+
+        /// <summary>
         /// Users collection
         /// Representing user model store
         /// </summary>
-        public List<User> Users { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }

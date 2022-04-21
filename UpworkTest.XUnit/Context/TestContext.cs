@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using ApplicationContext = UpworkTest.Context.Context;
 
 namespace UpworkTest.XUnit.Context
@@ -9,7 +10,11 @@ namespace UpworkTest.XUnit.Context
 
         public TestContext()
         {
-            Context = new ApplicationContext();
+            var options = new DbContextOptionsBuilder<ApplicationContext>()
+                .UseInMemoryDatabase(databaseName: $"{Guid.NewGuid()}")
+                .Options;
+
+            Context = new ApplicationContext(options);
         }
 
         public void Dispose()
